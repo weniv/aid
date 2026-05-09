@@ -164,6 +164,20 @@ function initHeroScene(canvas) {
     mouse.ty = (e.clientY / window.innerHeight - 0.5) * 0.6;
   });
 
+  // ---------- 스크롤 임팩트 ----------
+  // hero가 위로 사라지는 만큼을 0→1로 환산해 코어가 폭발적으로 커지게.
+  // ease-in 곡선(progress^2)로 후반부에 임팩트가 집중되도록 한다.
+  let scrollProgress = 0;
+  function updateScrollProgress() {
+    const rect = container.getBoundingClientRect();
+    const range = rect.height || 1;
+    const traveled = -rect.top;
+    scrollProgress = Math.max(0, Math.min(1, traveled / range));
+  }
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress);
+  updateScrollProgress();
+
   // ---------- 애니메이션 루프 ----------
   let inView = true;
   let raf = 0;
@@ -173,14 +187,27 @@ function initHeroScene(canvas) {
     raf = requestAnimationFrame(tick);
     const t = clock.getElapsedTime();
 
-    // 코어 회전 (느릿)
-    coreGroup.rotation.y = t * 0.12;
-    coreGroup.rotation.x = Math.sin(t * 0.18) * 0.18;
+    // 스크롤 임팩트 계수
+    const sp = scrollProgress;
+    const impact = sp * sp;            // 후반부 가속
+    const fade = 1 - sp;               // 보조 요소 페이드
+    const coreScale = 1 + impact * 7;  // 1× → 8×
 
-    // 코어 펄스
-    const pulseScale = 1 + Math.sin(t * 1.6) * 0.18;
+    // 코어 회전 (스크롤 시 회전 가속)
+    const spin = 0.12 + impact * 1.2;
+    coreGroup.rotation.y = t * spin;
+    coreGroup.rotation.x = Math.sin(t * 0.18) * 0.18;
+    coreGroup.scale.setScalar(coreScale);
+
+    // 코어 펄스 — 스크롤 동안엔 펄스 진폭이 더 커짐
+    const pulseAmp = 0.18 + impact * 0.4;
+    const pulseScale = 1 + Math.sin(t * 1.6) * pulseAmp;
     corePulse.scale.setScalar(pulseScale);
-    corePulse.material.opacity = 0.4 + Math.sin(t * 1.6) * 0.2;
+    corePulse.material.opacity = (0.4 + Math.sin(t * 1.6) * 0.2) * fade;
+
+    // 와이어 코어는 임팩트 후반부에 부드럽게 사라져 다음 섹션으로 전환
+    coreWire.material.opacity = 0.85 * (1 - Math.max(0, (sp - 0.55) / 0.45));
+    coreSolid.material.opacity = 0.06 * fade;
 
     // 노드 궤도 갱신
     const posAttr = nodeGeometry.attributes.position;
@@ -212,14 +239,20 @@ function initHeroScene(canvas) {
     }
     lineGeometry.attributes.position.needsUpdate = true;
 
-    // 별 천천히 회전
-    stars.rotation.y = t * 0.02;
+    // 노드 / 연결선은 스크롤하면 같이 옅어져 코어가 화면을 차지하도록
+    nodeMaterial.opacity = 0.95 * fade;
+    lineMaterial.opacity = 0.18 * fade;
 
-    // 마우스 패럴랙스 — 카메라가 아주 살짝 따라가게
+    // 별 천천히 회전 + 임팩트 시 살짝 페이드
+    stars.rotation.y = t * 0.02;
+    stars.material.opacity = 0.5 * fade;
+
+    // 마우스 패럴랙스 + 스크롤 dolly — 코어 안으로 빨려들어가는 듯한 카메라
     mouse.x += (mouse.tx - mouse.x) * 0.05;
     mouse.y += (mouse.ty - mouse.y) * 0.05;
     camera.position.x = mouse.x * 1.2;
     camera.position.y = -mouse.y * 1.2;
+    camera.position.z = 16 - impact * 6;
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);
