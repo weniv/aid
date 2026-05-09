@@ -1,0 +1,59 @@
+/*
+ * Reset
+ * - 브라우저 기본 마진/패딩 제거
+ * - 폼 요소가 부모의 폰트/색상을 상속받도록
+ * - 리스트 마커 제거
+ * - 이미지/SVG 정렬 보정
+ * - 링크 밑줄 제거
+ *
+ * html { font-size: 62.5% } : 1rem == 10px (rem 계산을 쉽게 하기 위함)
+ */
+
+body, button, h1, h2, h3, h4, h5, h6, input, li, ol, p, ul {
+  padding: 0;
+  margin: 0;
+}
+
+button, input {
+  box-sizing: border-box;
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  padding: 0;
+  border: 0;
+  vertical-align: middle;
+}
+
+button:enabled {
+  cursor: pointer;
+}
+
+li, ol, ul {
+  list-style: none;
+}
+
+dd, dl, dt {
+  padding: 0;
+  margin: 0;
+}
+
+img, svg {
+  vertical-align: top;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+address {
+  font: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}

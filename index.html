@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AID 30+ 집중캠프 — 제주 재직자 AI·디지털 집중과정</title>
+  <meta name="description" content="제주특별자치도 30세 이상 중소기업 재직자를 위한 AI·디지털(AID) 집중과정. Gemini, ChatGPT, Claude, Notion, 데이터 분석을 실무 중심으로 4주간 학습합니다." />
+  <link rel="stylesheet" href="./style/index.css" />
+  <link rel="stylesheet" href="./assets/landing.css" />
+  <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.2/dist/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+        "three/examples/jsm/": "https://unpkg.com/three@0.152.2/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ============== HEADER ============== -->
+  <header class="site-header">
+    <div class="max-width site-header__inner">
+      <a href="#top" class="site-header__brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">AID 30+ 집중캠프</span>
+      </a>
+      <nav class="site-header__nav" aria-label="주요 메뉴">
+        <a href="#about">소개</a>
+        <a href="#tracks">트랙</a>
+        <a href="#structure">학습구조</a>
+        <a href="#faculty">교수진</a>
+        <a href="#schedule">일정</a>
+      </nav>
+      <a href="#apply" class="btn btn--small btn--primary site-header__cta">신청하기</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+      <div class="hero__bg">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      </div>
+      <div class="max-width hero__inner">
+        <div class="hero__content">
+          <span class="hero__eyebrow">2026 제주대학교 · ㈜위니브 컨소시엄</span>
+          <h1 class="hero__title">
+            제주의 일터를 바꾸는<br />
+            <span class="txt-highlight">AI · 디지털 집중캠프</span>
+          </h1>
+          <p class="hero__lead">
+            Gemini · ChatGPT · Claude · Notion · 데이터분석까지 —<br />
+            제주 30세 이상 중소기업 재직자를 위한 4주 단기 집중 PBL 과정
+          </p>
+          <div class="hero__cta">
+            <a href="#apply" class="btn btn--medium btn--primary">모집 신청하기</a>
+            <a href="#tracks" class="btn btn--medium btn--outline">트랙 살펴보기</a>
+          </div>
+
+          <ul class="hero__stats" aria-label="핵심 지표">
+            <li><strong>4</strong><span>트랙 운영</span></li>
+            <li><strong>30명</strong><span>회차당 정원</span></li>
+            <li><strong>11~12h</strong><span>단기 집중</span></li>
+            <li><strong>80점+</strong><span>이수 기준</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <span></span>
+        <span class="hero__scroll-text">SCROLL</span>
+      </div>
+    </section>
+
+    <!-- ============== ABOUT ============== -->
+    <section id="about" class="section section--about">
+      <div class="max-width">
+        <div class="section__head">
+          <span class="section__eyebrow">ABOUT</span>
+          <h2 class="section__title">제주 재직자를 위한, 실무 중심 디지털 전환 교육</h2>
+          <p class="section__lead">
+            <span class="txt-highlight">AID 30+ 집중캠프</span>는 제주특별자치도 30세 이상 중소기업 재직자를 대상으로
+            AI · 데이터 · 협업 도구를 단기간에 익히고 현장에 적용할 수 있도록 설계된 PBL 기반 집중 교육과정입니다.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <div class="about-card__icon" data-icon="brain"></div>
+            <h3>실무중심 디지털 전환</h3>
+            <p>산업 현장에서 즉시 적용 가능한 디지털 역량을 갖춘 전문가를 양성합니다.</p>
+          </article>
+          <article class="about-card">
+            <div class="about-card__icon" data-icon="people"></div>
+            <h3>현장형 AI 활용 인재</h3>
+            <p>PBL(프로젝트 기반 학습) 중심으로 실제 업무 문제를 해결하며 학습합니다.</p>
+          </article>
+          <article class="about-card">
+            <div class="about-card__icon" data-icon="island"></div>
+            <h3>제주 특화 교육</h3>
+            <p>관광 · 농업 · 서비스 등 제주 산업 현장 데이터를 그대로 활용합니다.</p>
+          </article>
+        </div>
+
+        <dl class="about-meta">
+          <div><dt>사업명</dt><dd>AID 30+ 집중캠프 (AI · 디지털 집중과정)</dd></div>
+          <div><dt>주관대학</dt><dd>제주대학교 산학협력단</dd></div>
+          <div><dt>협력기관</dt><dd>한국인지과학산업협회 · ㈜위니브</dd></div>
+          <div><dt>교육 대상</dt><dd>제주도 내 30세 이상 중소기업 재직자</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============== TRACKS ============== -->
+    <section id="tracks" class="section section--tracks">
+      <div class="max-width">
+        <div class="section__head">
+          <span class="section__eyebrow">TRACKS</span>
+          <h2 class="section__title">2026년 4개 트랙</h2>
+          <p class="section__lead">
+            업무 성격과 목표에 맞춰 선택할 수 있는 4개 과정. 모든 트랙은 단기 집중 PBL 방식으로 운영됩니다.
+          </p>
+        </div>
+
+        <div class="track-grid">
+          <article class="track-card track-card--g">
+            <div class="track-card__head">
+              <span class="track-card__badge">G트랙</span>
+              <span class="track-card__tag">AI 생산성</span>
+            </div>
+            <h3>AI 생산성 혁신 과정</h3>
+            <p>Gemini, ChatGPT, Claude 등을 다양하게 활용해 실무 업무 생산성을 끌어올리는 적용형 과정입니다.</p>
+            <ul>
+              <li>업무 자동화 · 회의록 요약</li>
+              <li>마케팅 · 응대 메시지 생성</li>
+              <li>실무 프롬프트 패턴 정립</li>
+            </ul>
+          </article>
+
+          <article class="track-card track-card--t">
+            <div class="track-card__head">
+              <span class="track-card__badge">T트랙</span>
+              <span class="track-card__tag">데이터 인사이트</span>
+            </div>
+            <h3>데이터 인사이트 전문가 과정</h3>
+            <p>산업체의 실제 문제를 주제로 한 PBL 실습을 통해 데이터 분석 결과를 즉시 실무에 적용합니다.</p>
+            <ul>
+              <li>매출 · KPI 대시보드</li>
+              <li>수요 · 가격 예측 분석</li>
+              <li>경영 의사결정 리포팅</li>
+            </ul>
+          </article>
+
+          <article class="track-card track-card--n">
+            <div class="track-card__head">
+              <span class="track-card__badge">N트랙</span>
+              <span class="track-card__tag">협업 생산성</span>
+            </div>
+            <h3>협업 생산성 혁신 과정</h3>
+            <p>제주 산업 현장을 주제로 한 PBL을 통해 Notion 기반 문제 해결 시스템을 직접 설계합니다.</p>
+            <ul>
+              <li>업무 매뉴얼 · 지식베이스</li>
+              <li>일정 · 프로젝트 관리</li>
+              <li>팀 소통 체계 구축</li>
+            </ul>
+          </article>
+
+          <article class="track-card track-card--s">
+            <div class="track-card__head">
+              <span class="track-card__badge">S트랙</span>
+              <span class="track-card__tag">AI 심화</span>
+            </div>
+            <h3>AI 심화 트랙</h3>
+            <p>Claude Code · Claude Cowork · Claude Dispatch 등을 통해 AX(AI Transformation)를 실현하는 심화과정입니다.</p>
+            <ul>
+              <li>Claude Code 기반 자동화</li>
+              <li>에이전트 · 협업 워크플로우</li>
+              <li>조직 단위 AX 전환 설계</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== STRUCTURE ============== -->
+    <section id="structure" class="section section--structure">
+      <div class="max-width">
+        <div class="section__head">
+          <span class="section__eyebrow">STRUCTURE</span>
+          <h2 class="section__title">4단계 순차 학습 구조</h2>
+          <p class="section__lead">
+            온라인으로 기초를 다지고, 오프라인에서 응용 · 심화 · PBL을 진행하는 혼합형 학습 방법론입니다.
+          </p>
+        </div>
+
+        <ol class="step-list">
+          <li class="step">
+            <span class="step__num">01</span>
+            <div>
+              <h3>Foundation <em>· 4시간 · 온라인 LMS</em></h3>
+              <p>도구별 기본 기능을 자기주도 학습. 15분 단위 영상으로 반복 시청 가능.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">02</span>
+            <div>
+              <h3>Application <em>· 2시간 · 오프라인 실습</em></h3>
+              <p>실무 적용 기법을 팀 기반 실습으로 학습.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">03</span>
+            <div>
+              <h3>Advanced <em>· 2시간 · 오프라인 프로젝트</em></h3>
+              <p>고급 기능을 활용한 미니 프로젝트 수행.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">04</span>
+            <div>
+              <h3>PBL <em>· 3시간 · 오프라인 협업</em></h3>
+              <p>실제 현장 문제를 팀으로 해결하고 발표.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="structure-meta">
+          <div class="structure-meta__item">
+            <strong>평일 저녁반</strong>
+            <span>목요일 18:00 시작 · 4주간</span>
+          </div>
+          <div class="structure-meta__item">
+            <strong>주말반</strong>
+            <span>토요일 14:00 시작 · 4주간</span>
+          </div>
+          <div class="structure-meta__item">
+            <strong>난이도 / 정원</strong>
+            <span>중급 · 회차당 30명</span>
+          </div>
+          <div class="structure-meta__item">
+            <strong>합격 기준</strong>
+            <span>100점 만점 / 80점 이상</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== BADGE ============== -->
+    <section class="section section--badge">
+      <div class="max-width">
+        <div class="section__head">
+          <span class="section__eyebrow">DIGITAL BADGE</span>
+          <h2 class="section__title">단계별 4종 디지털 배지</h2>
+          <p class="section__lead">
+            트랙마다 단계별 배지를 발급하고, 전 과정 이수 시 통합형 마스터 배지를 수여합니다.
+          </p>
+        </div>
+
+        <div class="badge-grid">
+          <div class="badge"><span class="badge__dot"></span><strong>Knowledge</strong><p>1차시 완료 + 진단 퀴즈 80점 이상</p></div>
+          <div class="badge"><span class="badge__dot"></span><strong>Skill</strong><p>2~3차시 실습 완료 + 우수 과제 평가</p></div>
+          <div class="badge"><span class="badge__dot"></span><strong>Experience</strong><p>4차시 PBL 프로젝트 발표 성공</p></div>
+          <div class="badge badge--master"><span class="badge__dot"></span><strong>Master</strong><p>전 과정 완료 + 종합 평가 80점 이상</p></div>
+        </div>
+
+        <blockquote class="quote">제주도 중소기업 지원사업 가산점 · 멘토 자격 · 강사 풀 등록 등 다양한 혜택과 연계됩니다.</blockquote>
+      </div>
+    </section>
+
+    <!-- ============== FACULTY ============== -->
+    <section id="faculty" class="section section--faculty">
+      <div class="max-width">
+        <div class="section__head">
+          <span class="section__eyebrow">FACULTY</span>
+          <h2 class="section__title">교수진</h2>
+          <p class="section__lead">
+            대학 교수진과 산업계 전문가가 함께 PBL · 실시간 피드백 · 자기주도 학습을 설계합니다.
+          </p>
+        </div>
+
+        <div class="faculty-grid">
+          <article class="card faculty-card">
+            <div class="faculty-card__avatar" data-avatar="byc"></div>
+            <div class="faculty-card__body">
+              <strong>변영철 <span>제주대학교 · 교수</span></strong>
+              <p>(사)정보과학기술연구소 소장 · 제주산학융합지구사업단 단장 · 제주RIS 지능형서비스사업단 단장</p>
+              <span class="faculty-card__tag">전문분야 · 인공지능</span>
+            </div>
+          </article>
+          <article class="card faculty-card">
+            <div class="faculty-card__avatar" data-avatar="lhj"></div>
+            <div class="faculty-card__body">
+              <strong>이호준 <span>㈜위니브 · 대표</span></strong>
+              <p>협업플랫폼 운영 대표기업 · AID 30+ 집중캠프 협력기관 사업단장</p>
+              <span class="faculty-card__tag">전문분야 · 협업플랫폼</span>
+            </div>
+          </article>
+          <article class="card faculty-card">
+            <div class="faculty-card__avatar" data-avatar="kms"></div>
+            <div class="faculty-card__body">
+              <strong>김민승 <span>㈜위니브 · 팀장</span></strong>
+              <p>교재개발 · 다수 강의경력 · 콘텐츠 기획</p>
+              <span class="faculty-card__tag">전문분야 · 웹 개발</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== SCHEDULE (TBD) ============== -->
+    <section id="schedule" class="section section--schedule">
+      <div class="max-width">
+        <div class="section__head">
+          <span class="section__eyebrow">SCHEDULE</span>
+          <h2 class="section__title">2026년 모집 일정</h2>
+          <p class="section__lead">
+            아래 일정은 확정 후 업데이트됩니다. 회차별 접수기간 · 온라인 / 오프라인 일정이 차례로 공개될 예정입니다.
+          </p>
+        </div>
+
+        <div class="schedule-table">
+          <div class="schedule-row schedule-row--head">
+            <span>트랙</span><span>회차</span><span>접수기간</span><span>온라인 (1주차)</span><span>오프라인 (2~4주차)</span>
+          </div>
+          <div class="schedule-row"><span>G트랙</span><span>1회차</span><span class="tbd">미정</span><span class="tbd">미정</span><span class="tbd">미정</span></div>
+          <div class="schedule-row"><span>T트랙</span><span>1회차</span><span class="tbd">미정</span><span class="tbd">미정</span><span class="tbd">미정</span></div>
+          <div class="schedule-row"><span>N트랙</span><span>1회차</span><span class="tbd">미정</span><span class="tbd">미정</span><span class="tbd">미정</span></div>
+          <div class="schedule-row"><span>S트랙</span><span>1회차</span><span class="tbd">미정</span><span class="tbd">미정</span><span class="tbd">미정</span></div>
+        </div>
+        <p class="schedule-note">* 일정은 사업 운영 일정에 따라 추후 공지됩니다.</p>
+      </div>
+    </section>
+
+    <!-- ============== APPLY ============== -->
+    <section id="apply" class="section section--apply">
+      <div class="max-width section--apply__inner">
+        <div class="apply-glow" aria-hidden="true"></div>
+        <span class="section__eyebrow">APPLY</span>
+        <h2 class="section__title">지금, 제주의 일터에 AI를 더하세요</h2>
+        <p class="section__lead">
+          모집은 Google Form으로 진행됩니다. 아래 버튼을 통해 신청하실 수 있습니다.<br />
+          <em>* 신청 링크는 모집 시작 시 활성화됩니다.</em>
+        </p>
+        <div class="apply-cta">
+          <!-- TODO: href를 모집 Google Form URL로 교체 -->
+          <a href="#" class="btn btn--medium btn--primary apply-cta__primary" data-form-link aria-disabled="true">
+            Google Form으로 신청하기
+          </a>
+          <a href="mailto:" class="btn btn--medium btn--outline">문의하기</a>
+        </div>
+
+        <ul class="apply-process" aria-label="선발 절차">
+          <li><span>01</span><strong>간편 신청</strong><p>Google Form / 행사 현장</p></li>
+          <li><span>02</span><strong>수요조사</strong><p>전화 · 이메일 심사</p></li>
+          <li><span>03</span><strong>화상 면접</strong><p>편안한 대화 형식 (필요시)</p></li>
+          <li><span>04</span><strong>최종 안내</strong><p>개별 결과 통보</p></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="site-footer">
+    <div class="max-width site-footer__inner">
+      <div class="site-footer__brand">
+        <strong>AID 30+ 집중캠프</strong>
+        <p>2026 제주대학교 · ㈜위니브 컨소시엄</p>
+      </div>
+      <div class="site-footer__cols">
+        <div>
+          <h4>주관 / 협력</h4>
+          <p>제주대학교 산학협력단</p>
+          <p>한국인지과학산업협회 · ㈜위니브</p>
+        </div>
+        <div>
+          <h4>오프라인 장소</h4>
+          <p>제주대학교 공과대학 실습실</p>
+          <p><small>* 일부 변경 가능</small></p>
+        </div>
+        <div>
+          <h4>커뮤니티</h4>
+          <p>카카오톡 오픈채팅 "제주 AID 30+ 스마트워크"</p>
+          <p>#제주스마트워크 #제주디지털전환</p>
+        </div>
+      </div>
+      <p class="site-footer__copy">© 2026 AID 30+ 집중캠프 · 제주대학교 산학협력단 · ㈜위니브</p>
+    </div>
+  </footer>
+
+  <script type="module" src="./assets/hero-scene.js"></script>
+</body>
+</html>

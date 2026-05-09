@@ -1,0 +1,22 @@
+/*
+ * WENIV Style System — Entry Point
+ * --------------------------------------------------------------
+ * 한 번에 모든 스타일을 가져오고 싶다면 이 파일만 import 하세요.
+ *
+ *   <link rel="stylesheet" href="./style/index.css">
+ *
+ * 또는 필요한 부분만 골라서 import 할 수도 있습니다.
+ *   - tokens.css     : CSS 변수 (컬러/그림자) — 거의 항상 필요
+ *   - fonts.css      : Pretendard 폰트 정의
+ *   - reset.css      : 브라우저 기본값 초기화
+ *   - base.css       : body, max-width, a11y-hidden 등
+ *   - components.css : 버튼/카드/네비 등 재사용 컴포넌트
+ *
+ * 순서가 중요합니다. (tokens → fonts → reset → base → components)
+ */
+
+@import url("./tokens.css");
+@import url("./fonts.css");
+@import url("./reset.css");
+@import url("./base.css");
+@import url("./components.css");

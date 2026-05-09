@@ -1,0 +1,81 @@
+/*
+ * Base + Utility classes
+ * - body 기본 폰트/배경 설정
+ * - 반응형 컨테이너 (.max-width)
+ * - 접근성 헬퍼 (.a11y-hidden)
+ * - 글자 크기 모드 (.size0 ~ .size4) — 사용자 글자 크기 설정용
+ * - 텍스트 말줄임 (.sl-ellipsis, .multi-ellipsis)
+ * - 텍스트 강조 (.txt-highlight)
+ *
+ * 사이즈 단위:
+ *  - 1rem = 10px (reset.css 의 62.5% 기준)
+ *  - clamp(min, vw, max) 으로 화면 폭에 비례한 반응형 사이즈
+ */
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard", "Pretendard Fallback",
+               -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  min-width: 320px;
+  font-size: clamp(1.4rem, 1.3445378151vw, 1.6rem);
+  color: var(--surface);
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+/* 시각적으로는 숨기되 스크린 리더에는 노출 (라벨, h1 등에 사용) */
+.a11y-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+/* 페이지 본문 가운데 정렬 컨테이너 (기본 1190px) */
+.max-width {
+  width: 119rem;
+  margin: auto;
+  max-width: calc(100% - 4rem);
+}
+
+/* 사용자 글자 크기 옵션 (body 또는 root 에 클래스 부여해서 사용) */
+.size0 main { font-size: clamp(1.2rem, 1.1764705882vw, 1.4rem); }
+.size1 main { font-size: clamp(1.3rem, 1.2605042017vw, 1.5rem); }
+.size2 main { font-size: clamp(1.5rem, 1.3445378151vw, 1.6rem); }
+.size3 main { font-size: clamp(1.6rem, 1.5126050420vw, 1.8rem); }
+.size4 main { font-size: clamp(1.8rem, 1.6806722689vw, 2.0rem); }
+
+.contents {
+  flex-grow: 1;
+  position: relative;
+}
+
+/* 한 줄 말줄임 */
+.sl-ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 여러 줄 말줄임 (기본 2줄) */
+.multi-ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+/* 본문 안의 강조 텍스트 (브랜드 컬러) */
+.txt-highlight {
+  font-weight: 700;
+  color: var(--primary);
+  background: transparent;
+}

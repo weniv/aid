@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>Rigged Lycat — demo</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #1b1f2a; color: #e6e9ef; font-family: system-ui, sans-serif; }
+  #app { position: fixed; inset: 0; }
+  #ui {
+    position: fixed; top: 12px; left: 12px; z-index: 10;
+    background: rgba(0,0,0,0.5); padding: 12px 14px; border-radius: 10px;
+    display: flex; flex-direction: column; gap: 8px; min-width: 220px;
+  }
+  #ui h1 { font-size: 14px; margin: 0 0 4px 0; font-weight: 600; }
+  #ui .row { display: flex; gap: 6px; flex-wrap: wrap; }
+  #ui button {
+    background: #2a3142; color: #e6e9ef; border: 1px solid #3a4256;
+    padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  }
+  #ui button.active { background: #4a6cff; border-color: #4a6cff; }
+  #ui label { font-size: 12px; display: flex; align-items: center; gap: 6px; }
+  #ui input[type=range] { flex: 1; }
+  #info { font-size: 11px; opacity: 0.7; line-height: 1.4; }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+<div id="ui">
+  <h1>Rigged Lycat</h1>
+  <div class="row" id="poses">
+    <button data-pose="tpose" class="active">양팔벌려 (T-pose)</button>
+    <button data-pose="rest">팔 내리기</button>
+    <button data-pose="walk">걷기</button>
+  </div>
+  <label><input type="checkbox" id="move" /> 위치 이동 포함</label>
+  <label>속도 <input type="range" id="speed" min="0.2" max="3" step="0.1" value="1" /></label>
+  <label><input type="checkbox" id="markers" checked /> pivot 마커</label>
+  <label><input type="checkbox" id="bbox" /> 분할 그룹별 색상</label>
+  <div id="info">
+    드래그=회전 · 휠=줌 · 우클릭드래그=이동<br/>
+    분할은 GLB face 의 X 무게중심 기준이라 어깨/사타구니 경계 면이 살짝 끌려갈 수 있음.
+  </div>
+</div>
+
+<canvas id="app"></canvas>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { loadRiggedLycat } from './index.js';
+
+const canvas = document.getElementById('app');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1b1f2a);
+
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+camera.position.set(4, 3, 5);
+
+const controls = new OrbitControls(camera, canvas);
+controls.target.set(0, 1, 0);
+controls.enableDamping = true;
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const dir = new THREE.DirectionalLight(0xffffff, 1.0);
+dir.position.set(4, 6, 3);
+dir.castShadow = true;
+dir.shadow.mapSize.set(1024, 1024);
+dir.shadow.camera.left = -5;
+dir.shadow.camera.right = 5;
+dir.shadow.camera.top = 5;
+dir.shadow.camera.bottom = -5;
+scene.add(dir);
+
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(40, 40),
+  new THREE.MeshStandardMaterial({ color: 0x2a3142 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
+
+const grid = new THREE.GridHelper(20, 20, 0x556080, 0x3a4256);
+grid.position.y = 0.001;
+scene.add(grid);
+
+let rigged = null;
+
+function makeMarker(color) {
+  return new THREE.Mesh(
+    new THREE.SphereGeometry(0.04, 12, 12),
+    new THREE.MeshBasicMaterial({ color, depthTest: false })
+  );
+}
+
+loadRiggedLycat().then((r) => {
+  rigged = r;
+  scene.add(rigged.root);
+
+  console.log('[rigged-lycat] limb mesh counts:', {
+    armL: rigged.parts.armL.children.length,
+    armR: rigged.parts.armR.children.length,
+    legL: rigged.parts.legL.children.length,
+    legR: rigged.parts.legR.children.length,
+  });
+  console.log('[rigged-lycat] pivots:', rigged.pivots);
+  console.log('[rigged-lycat] root children:', rigged.root.children.map(c => c.name || c.type));
+
+  const colors = { armL: 0xff6b6b, armR: 0x6bff8c, legL: 0x6bb1ff, legR: 0xffd96b };
+  for (const [k, color] of Object.entries(colors)) {
+    const m = makeMarker(color);
+    m.position.copy(rigged.pivots[k]);
+    m.userData.kind = 'marker';
+    rigged.root.add(m);
+  }
+
+  controls.target.set(0, 1.0, 0);
+});
+
+// UI
+const poseBtns = [...document.querySelectorAll('#poses button')];
+poseBtns.forEach((btn) => btn.addEventListener('click', () => {
+  if (!rigged) return;
+  poseBtns.forEach((b) => b.classList.toggle('active', b === btn));
+  const pose = btn.dataset.pose;
+  rigged.setPose(pose);
+  if (pose !== 'walk') rigged.root.position.set(0, 0, 0);
+}));
+document.getElementById('move').addEventListener('change', (e) => {
+  if (!rigged) return;
+  rigged.moveOnWalk = e.target.checked;
+  if (!e.target.checked) rigged.root.position.set(0, 0, 0);
+});
+document.getElementById('speed').addEventListener('input', (e) => {
+  if (!rigged) return;
+  rigged.walkSpeed = parseFloat(e.target.value);
+});
+document.getElementById('markers').addEventListener('change', (e) => {
+  if (!rigged) return;
+  rigged.root.traverse((o) => { if (o.userData?.kind === 'marker') o.visible = e.target.checked; });
+});
+document.getElementById('bbox').addEventListener('change', (e) => {
+  if (!rigged) return;
+  // 토글 시 limb mesh material 을 단색으로 잠깐 바꾸어 분할 결과를 보여 준다.
+  const tints = { armL: 0xff6b6b, armR: 0x6bff8c, legL: 0x6bb1ff, legR: 0xffd96b };
+  for (const [k, c] of Object.entries(tints)) {
+    rigged.parts[k].traverse((o) => {
+      if (!o.isMesh) return;
+      if (e.target.checked) {
+        o.userData._origMat = o.material;
+        o.material = new THREE.MeshStandardMaterial({ color: c });
+      } else if (o.userData._origMat) {
+        o.material = o.userData._origMat;
+      }
+    });
+  }
+});
+
+// 무한 트랙처럼 멀리 가면 다시 원점으로 (이동 모드 디버깅용)
+function wrapPosition(pos, range = 4) {
+  if (Math.abs(pos.z) > range) pos.z = -Math.sign(pos.z) * range;
+  if (Math.abs(pos.x) > range) pos.x = -Math.sign(pos.x) * range;
+}
+
+// resize
+function resize() {
+  const w = canvas.clientWidth || window.innerWidth;
+  const h = canvas.clientHeight || window.innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+const clock = new THREE.Clock();
+function tick() {
+  const dt = Math.min(0.05, clock.getDelta());
+  if (rigged) {
+    rigged.update(dt);
+    if (rigged.moveOnWalk) wrapPosition(rigged.root.position);
+  }
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+</body>
+</html>
