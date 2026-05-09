@@ -42,6 +42,11 @@
   </div>
   <label><input type="checkbox" id="move" /> 위치 이동 포함</label>
   <label>속도 <input type="range" id="speed" min="0.2" max="3" step="0.1" value="1" /></label>
+  <label>어깨 보정 <span id="shoulderInsetVal" style="min-width:32px; text-align:right; font-variant-numeric:tabular-nums;">0.25</span> <input type="range" id="shoulderInset" min="0" max="1" step="0.05" value="0.25" /></label>
+  <label>어깨 캡 <span id="shoulderCapVal" style="min-width:32px; text-align:right; font-variant-numeric:tabular-nums;">0.25</span> <input type="range" id="shoulderCap" min="0" max="1.2" step="0.05" value="0.25" /></label>
+  <label>어깨 캡 Y <span id="shoulderCapYVal" style="min-width:42px; text-align:right; font-variant-numeric:tabular-nums;">-0.20</span> <input type="range" id="shoulderCapY" min="-1" max="1" step="0.05" value="-0.2" /></label>
+  <label>어깨 캡 Z <span id="shoulderCapZVal" style="min-width:42px; text-align:right; font-variant-numeric:tabular-nums;">-0.10</span> <input type="range" id="shoulderCapZ" min="-1" max="1" step="0.05" value="-0.1" /></label>
+  <label>팔 베벨 <span id="armBevelVal" style="min-width:32px; text-align:right; font-variant-numeric:tabular-nums;">0.40</span> <input type="range" id="armBevel" min="0" max="0.8" step="0.05" value="0.4" /></label>
   <label><input type="checkbox" id="markers" checked /> pivot 마커</label>
   <label><input type="checkbox" id="bbox" /> 분할 그룹별 색상</label>
   <div id="info">
@@ -146,6 +151,36 @@ document.getElementById('move').addEventListener('change', (e) => {
 document.getElementById('speed').addEventListener('input', (e) => {
   if (!rigged) return;
   rigged.walkSpeed = parseFloat(e.target.value);
+});
+document.getElementById('shoulderInset').addEventListener('input', (e) => {
+  const v = parseFloat(e.target.value);
+  document.getElementById('shoulderInsetVal').textContent = v.toFixed(2);
+  if (!rigged) return;
+  rigged.shoulderInset = v;
+});
+document.getElementById('shoulderCap').addEventListener('input', (e) => {
+  const v = parseFloat(e.target.value);
+  document.getElementById('shoulderCapVal').textContent = v.toFixed(2);
+  if (!rigged) return;
+  rigged.shoulderCapScale = v;
+});
+document.getElementById('shoulderCapY').addEventListener('input', (e) => {
+  const v = parseFloat(e.target.value);
+  document.getElementById('shoulderCapYVal').textContent = v.toFixed(2);
+  if (!rigged) return;
+  rigged.shoulderCapY = v;
+});
+document.getElementById('shoulderCapZ').addEventListener('input', (e) => {
+  const v = parseFloat(e.target.value);
+  document.getElementById('shoulderCapZVal').textContent = v.toFixed(2);
+  if (!rigged) return;
+  rigged.shoulderCapZ = v;
+});
+document.getElementById('armBevel').addEventListener('input', (e) => {
+  const v = parseFloat(e.target.value);
+  document.getElementById('armBevelVal').textContent = v.toFixed(2);
+  if (!rigged) return;
+  rigged.armBevel = v;
 });
 document.getElementById('markers').addEventListener('change', (e) => {
   if (!rigged) return;
