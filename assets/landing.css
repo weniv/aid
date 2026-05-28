@@ -903,6 +903,8 @@
 }
 .apply-cta__primary[aria-disabled="true"] {
   position: relative;
+  opacity: 0.6;
+  pointer-events: none;
 }
 .apply-cta__primary[aria-disabled="true"]::after {
   content: "준비중";
@@ -916,6 +918,17 @@
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+}
+.apply-consent {
+  max-width: 56rem;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--grayLv2);
+}
+.apply-consent strong {
+  color: var(--surface-text);
+  font-weight: 700;
 }
 
 .apply-process {
