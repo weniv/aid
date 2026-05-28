@@ -1,17 +1,13 @@
 /*
  * Pretendard 폰트 정의
- * - WENIV의 메인 한글 폰트 (Variable Font)
- * - font-weight 45 ~ 920 범위 지원
- * - 폰트 파일이 늦게 로드되어도 대체 폰트로 우선 노출 (font-display: swap)
- * - 시스템 Arial을 fallback으로 잡고 metric override로 레이아웃 점프 최소화
+ * - WENIV의 메인 한글 폰트 (Variable Font, weight 45~920)
+ * - 공식 dynamic-subset(자체 호스팅): 페이지에 실제 쓰인 유니코드 범위의
+ *   서브셋 woff2만 브라우저가 내려받음 → 초기 폰트 다운로드량 대폭 감소
+ *   (기존 단일 2MB woff2 대체 / 자세한 정의는 fonts/pretendard-dynamic-subset.css)
+ * - font-display: swap + Arial metric override 로 레이아웃 점프 최소화
  */
 
-@font-face {
-  font-family: "Pretendard";
-  src: url("./fonts/pretendard.woff2") format("woff2");
-  font-display: swap;
-  font-weight: 45 920;
-}
+@import url("./fonts/pretendard-dynamic-subset.css");
 
 @font-face {
   font-family: "Pretendard Fallback";

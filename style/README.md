@@ -22,7 +22,8 @@ style/
 ├── base.css         # body 기본값 + 유틸 클래스 (.max-width, .a11y-hidden ...)
 ├── components.css   # 재사용 컴포넌트 (.btn, .card, .nav-pill ...)
 ├── fonts/
-│   └── pretendard.woff2     # Pretendard Variable Font
+│   ├── pretendard-dynamic-subset.css   # Pretendard 공식 dynamic-subset 정의 (92개 @font-face)
+│   └── woff2-dynamic-subset/           # 유니코드 범위별 서브셋 woff2 92개 (필요한 것만 로드)
 ├── raw/             # weniv.co.kr 에서 받아온 원본 CSS (참조용)
 │   ├── 45f3905322a87357.css
 │   ├── ce7aa9b799668111.css   # Swiper 라이브러리
@@ -274,7 +275,7 @@ export default function RootLayout({ children }) {
 - 라이선스: SIL Open Font License 1.1 (상업적 사용 가능)
 - 원본: <https://github.com/orioncactus/pretendard>
 
-`fonts.css` 의 `src: url("./fonts/pretendard.woff2")` 경로는 `style/` 폴더 기준의 상대 경로입니다. 폴더 구조를 옮길 경우 이 경로도 함께 수정하세요.
+`fonts.css` 는 `@import url("./fonts/pretendard-dynamic-subset.css")` 로 공식 dynamic-subset 을 불러옵니다. 그 CSS 내부의 `src: url(./woff2-dynamic-subset/...)` 는 CSS 파일 위치(`style/fonts/`) 기준 상대 경로입니다. 폴더 구조를 옮길 경우 두 경로 관계를 유지하세요. (Pretendard v1.3.9 기준, 패밀리명은 `Pretendard` 로 보정)
 
 ---
 
@@ -283,7 +284,7 @@ export default function RootLayout({ children }) {
 `raw/` 폴더의 파일들은 weniv.co.kr 에서 그대로 받아온 원본입니다. 정리된 파일과 비교하면 다음과 같은 변경이 있었습니다.
 
 - Next.js 의 해시된 폰트 변수명 (`__pretendard_fde3a9`) 을 일반 이름 (`Pretendard`) 으로 변경
-- 폰트 경로를 `/_next/static/media/...` 에서 `./fonts/pretendard.woff2` 로 변경
+- 폰트를 단일 2MB woff2 → Pretendard 공식 dynamic-subset(자체 호스팅)으로 교체 (필요한 유니코드 범위만 로드)
 - weniv 내부 페이지에 종속된 컴포넌트 (Banner, Footer, Header) 는 제외
 - 일부 컴포넌트는 일반화된 클래스명 (`.Button_button__2jXbL` → `.btn`) 으로 재작성
 - Swiper 라이브러리 CSS 는 제외 (필요 시 `npm install swiper` 권장)
