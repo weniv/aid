@@ -14,12 +14,22 @@ function initHeroScene(canvas) {
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
   camera.position.set(0, 0, 16);
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    alpha: true,
-    powerPreference: 'high-performance',
-  });
+  // 모션 최소화 선호 여부 (멀미·접근성 — prefers-reduced-motion)
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // WebGL 미지원/생성 실패 시 캔버스를 숨기고 CSS 그라디언트 배경으로 폴백
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance',
+    });
+  } catch (err) {
+    canvas.style.display = 'none';
+    return;
+  }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
 
@@ -256,6 +266,18 @@ function initHeroScene(canvas) {
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);
+  }
+
+  // WebGL 컨텍스트 유실 시 루프 중단 (드라이버 리셋·탭 전환 등)
+  canvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+  });
+
+  // 모션 최소화 선호 시: 애니메이션 루프 없이 정적 1프레임만 렌더
+  if (prefersReducedMotion) {
+    renderer.render(scene, camera);
+    return;
   }
 
   // 뷰포트 안에 있을 때만 렌더 (성능 절약)
