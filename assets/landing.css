@@ -26,6 +26,9 @@
 .section--schedule {
   background: var(--grayLv1);
 }
+.section--faq {
+  background: var(--background);
+}
 .section--apply {
   background: var(--surface);
   color: var(--surface-text);
@@ -1098,6 +1101,58 @@
   .apply-process {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/* ---------- FAQ ---------- */
+.faq-list {
+  max-width: 76rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.faq-item {
+  border: 1px solid var(--grayLv2);
+  border-radius: 1.2rem;
+  background: var(--background);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.faq-item[open] {
+  border-color: rgba(var(--primary-rgb), 0.4);
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 2rem 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--grayLv4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::after {
+  content: "+";
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--primary);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+.faq-item p {
+  padding: 0 2.4rem 2rem;
+  font-size: 1.45rem;
+  line-height: 1.7;
+  color: var(--grayLv4);
 }
 
 /* ---------- FOOTER ---------- */
