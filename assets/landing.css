@@ -115,7 +115,7 @@
   gap: 2.8rem;
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 .site-header__nav a:hover {
   color: var(--primary);
@@ -225,7 +225,7 @@
 }
 .hero__stats span {
   font-size: 1.3rem;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 .hero__scroll {
   position: absolute;
@@ -237,7 +237,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.8rem;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   font-size: 1.2rem;
   letter-spacing: 0.18em;
 }
@@ -347,7 +347,7 @@
 }
 .about-meta dt {
   font-size: 1.3rem;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   font-weight: 500;
   margin-bottom: 0.6rem;
 }
@@ -456,7 +456,7 @@
 .track-card__tag {
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 .track-card h3 {
   font-size: 2.4rem;
@@ -532,7 +532,7 @@
   font-style: normal;
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   margin-top: 0.4rem;
 }
 .step p {
@@ -563,7 +563,7 @@
 }
 .structure-meta__item span {
   font-size: 1.3rem;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 @media (max-width: 767px) {
   .step-list {
@@ -642,7 +642,7 @@
 }
 .badge-meta dt {
   font-size: 1.3rem;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   font-weight: 600;
   letter-spacing: 0.02em;
   margin-bottom: 0.6rem;
@@ -687,7 +687,7 @@
   background: var(--grayLv1);
   font-size: 1.2rem;
   line-height: 1.6;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 @media (max-width: 767px) {
   .badge-feature {
@@ -800,7 +800,7 @@
 .faculty-card__body strong span {
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 .faculty-card__body p {
   font-size: 1.4rem;
@@ -923,14 +923,14 @@
   opacity: 0.55;
   pointer-events: none;
   background: transparent;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   border-color: var(--grayLv2);
 }
 
 .schedule-note {
   margin-top: 1.6rem;
   font-size: 1.3rem;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 
 /* 태블릿 — 6열은 좁아지므로 카드형으로 전환 */
@@ -956,7 +956,7 @@
   }
   .schedule-row > span:nth-child(2) {
     grid-area: round;
-    color: var(--grayLv3);
+    color: var(--grayLv3-aA11y);
     font-size: 1.3rem;
   }
   .schedule-row > span:nth-child(3) {
@@ -976,7 +976,7 @@
   /* 모바일 라벨 — data-label로 항목명 보충 */
   .schedule-row > span[data-label]:not(.schedule-track):not(.schedule-action)::before {
     content: attr(data-label) " · ";
-    color: var(--grayLv3);
+    color: var(--grayLv3-aA11y);
     font-weight: 500;
     margin-right: 0.4rem;
     font-size: 1.3rem;
@@ -1146,7 +1146,7 @@
   padding-top: 2.4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 1.2rem;
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   text-align: center;
 }
 @media (max-width: 767px) {
@@ -1170,7 +1170,7 @@
     color: var(--surface-text);
   }
   .about-card p {
-    color: var(--grayLv3);
+    color: var(--grayLv3-aA11y);
   }
   .step,
   .structure-meta__item {

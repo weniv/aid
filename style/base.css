@@ -37,6 +37,30 @@ body {
   position: absolute;
 }
 
+/* 키보드 포커스 표시 (마우스 클릭 시엔 표시 안 함) */
+:focus-visible {
+  outline: 3px solid var(--primary-a11y);
+  outline-offset: 2px;
+}
+
+/* 키보드 사용자용 본문 바로가기 — 포커스 시에만 노출 */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -8rem;
+  z-index: 100;
+  padding: 1rem 1.6rem;
+  border-radius: 0.8rem;
+  background: var(--primary-a11y);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.4rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
 /* 페이지 본문 가운데 정렬 컨테이너 (기본 1190px) */
 .max-width {
   width: 119rem;

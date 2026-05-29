@@ -23,11 +23,11 @@
   --background-rgb: 255, 255, 255;
 
   /* primary (brand blue) */
-  --primary: #2e6ff2;
+  --primary: #2e6ef0;
   --primary-lighten: #447ef3;
   --primary-darken: #145df0;
   --primary-text: #fff;
-  --primary-rgb: 46, 111, 242;
+  --primary-rgb: 46, 110, 240;
   --primary-a11y: #2861d2;
 
   /* surface (반대 색감, 텍스트/다크 패널 등) */
@@ -99,11 +99,11 @@
 :root .theme-light {
   --background: #fff;
   --background-rgb: 255, 255, 255;
-  --primary: #2e6ff2;
+  --primary: #2e6ef0;
   --primary-lighten: #447ef3;
   --primary-darken: #145df0;
   --primary-text: #fff;
-  --primary-rgb: 46, 111, 242;
+  --primary-rgb: 46, 110, 240;
   --primary-a11y: #2861d2;
   --surface: #121314;
   --surface-lighten: #1d1f20;

@@ -48,7 +48,7 @@
 }
 
 .btn--outline {
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   background: var(--background);
   border: 1px solid var(--grayLv2);
 }
@@ -74,7 +74,7 @@
   border-radius: 5rem;
   box-sizing: border-box;
   background: var(--grayLv1);
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
   font-weight: 500;
   font-size: clamp(1.4rem, 1.34454vw, 1.6rem);
   line-height: clamp(2rem, 1.68067vw, 2.2rem);
@@ -181,7 +181,7 @@
   line-height: 2.2rem;
 }
 .search-input::placeholder {
-  color: var(--grayLv3);
+  color: var(--grayLv3-aA11y);
 }
 .search-input:focus,
 .search-input:active {
