@@ -56,4 +56,11 @@ address {
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
+  /* sticky 헤더(7rem)에 가리지 않도록 앵커 스크롤 시 여백 확보 */
+  scroll-padding-top: 7rem;
+}
+/* prefers-reduced-motion 사용자는 즉시 스크롤 (멀미 방지) */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

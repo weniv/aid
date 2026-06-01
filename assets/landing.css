@@ -137,7 +137,8 @@
 /* ---------- HERO ---------- */
 .hero {
   position: relative;
-  min-height: clamp(72rem, 92vh, 96rem);
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -205,6 +206,22 @@
   gap: 1.2rem;
   margin-bottom: 5.6rem;
 }
+/* 히어로 outline 버튼("트랙 살펴보기") hover — 브랜드 톤으로 강조 */
+.hero__cta .btn--outline {
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.hero__cta .btn--outline:hover {
+  background: var(--activation);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(46, 110, 240, 0.18);
+}
 .hero__stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -233,7 +250,7 @@
 }
 .hero__scroll {
   position: absolute;
-  bottom: 3rem;
+  bottom: 10rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -244,6 +261,14 @@
   color: var(--grayLv3-aA11y);
   font-size: 1.2rem;
   letter-spacing: 0.18em;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.hero__scroll:hover {
+  color: var(--primary-a11y);
+}
+.hero__scroll:hover span:first-child {
+  background: linear-gradient(to bottom, transparent, var(--primary-a11y));
 }
 .hero__scroll span:first-child {
   width: 2px;
