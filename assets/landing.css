@@ -110,7 +110,8 @@
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 0.7rem;
-  background: radial-gradient(circle at 30% 30%, #6ea3ff 0 30%, transparent 31%), linear-gradient(135deg, var(--primary), var(--primary-darken));
+  background: url("./logo.svg") center / contain no-repeat;
+  /* box-shadow 는 SVG에 포함하지 않고 CSS에서 처리 */
   box-shadow: 0 4px 16px rgba(46, 111, 242, 0.45);
 }
 .site-header__nav {
