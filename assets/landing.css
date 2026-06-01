@@ -590,6 +590,15 @@
   line-height: 1.6;
 }
 
+.structure-meta__heading {
+  max-width: 76rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--grayLv4);
+  letter-spacing: -0.005em;
+}
 .structure-meta {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
