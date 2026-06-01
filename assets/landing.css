@@ -974,11 +974,24 @@
   white-space: nowrap;
 }
 .schedule-apply[aria-disabled="true"] {
-  opacity: 0.55;
+  position: relative;
   pointer-events: none;
   background: transparent;
   color: var(--grayLv3-aA11y);
   border-color: var(--grayLv2);
+}
+.schedule-apply[aria-disabled="true"]::after {
+  content: "준비중";
+  position: absolute;
+  top: -1.6rem;
+  right: -1.6rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 0.9rem;
+  background: var(--warn);
+  color: var(--warn-text);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .schedule-note {
@@ -1080,24 +1093,6 @@
 }
 .apply-cta .btn--outline:hover {
   background: rgba(255, 255, 255, 0.08);
-}
-.apply-cta__primary[aria-disabled="true"] {
-  position: relative;
-  opacity: 0.6;
-  pointer-events: none;
-}
-.apply-cta__primary[aria-disabled="true"]::after {
-  content: "준비중";
-  position: absolute;
-  top: -1rem;
-  right: -1rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: 1rem;
-  background: var(--warn);
-  color: var(--warn-text);
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
 }
 .apply-consent {
   max-width: 56rem;
